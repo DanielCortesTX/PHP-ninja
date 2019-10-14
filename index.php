@@ -1,30 +1,22 @@
 <?php 
 
-  $peopleOne = ['shaun', 'crystal', 'ryu'];
+  $blogs = [
+    ['title' => 'mario party', 'author' => 'mario', 'content' => 'lorem ipsum', 'likes' => 30],
+    ['title' => 'Mario kart cheats', 'author' => 'toad', 'content' => 'lorem ipsumvv', 'likes' => 25],
+    ['title' => 'Zelda hidden chests', 'author' => 'link', 'content' => 'lorem ipsumvv', 'likes' => 55]
 
-  $peopleTwo = array('ken', 'chun-li');
-  echo $peopleTwo[1];
+  ];
 
-  $ages = array(20,30,40,50);
-  $ages[1] = 25;
-  $ages[] = 60;
-
-  array_push($ages, 70);
-  // print_r($ages)
-
-  echo count($ages);
-
-  $peopeThree = array_merge($peopleOne, $peopleTwo);
-
-  // print_r($peopeThree)
-  $ninjasOne = ['shaun'=>'black', 'mario'=>'orange', 'luigi'=>'brown'];
-  echo $ninjasOne['mario'];
-
-  // print_r($ninjasOne);
-  $ninjasTwo = array('bowser'=>'green', 'peach'=>'yellow');
-  // print_r($ninjasTwo);
-  $ninjasTwo['peach'] = 'pink';
-  print_r($ninjasTwo);
+  
+  $blogs[] = ['title' => 'castle party', 'author' => 'peach', 'content' => 'lorem', 'likes' => 100];
+  echo $blogs[2]['author'];
+  echo count($blogs);
+  print_r($blogs);
+  $popped = array_pop($blogs);
+  print_r($popped);
+  // print_r($blogs);
+  // print_r($blogs[1]);
+  // print_r($blogs[1][1]);
 ?>
 
 <!DOCTYPE html>
