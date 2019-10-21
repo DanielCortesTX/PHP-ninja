@@ -17,8 +17,6 @@ mysqli_free_result($result);
 // close connection
 mysqli_close($conn);
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -28,9 +26,7 @@ mysqli_close($conn);
   <h4 class="center grey-text">Pizzas</h4>
   <div class="container">
     <div class="row">
-
       <?php foreach($pizzas as $pizza) :?>
-
         <div class="col s6 md3">
           <div class="card z-depth-0">
             <div class="card-content center">
@@ -46,15 +42,12 @@ mysqli_close($conn);
             </div>
           </div>
         </div>
-
       <?php endforeach;?>
-
       <?php if(count($pizzas) >= 2 ) :?>
         <p>there are 2 or more pizzas</p>
       <?php  else: ?>
         <p>There are less than 2 pizzas</p>
       <?php endif;?>
-
     </div>
   </div>
 

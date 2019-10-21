@@ -43,21 +43,31 @@ $errors = array('email'=>'', 'title'=>'', 'ingredients'=>'');
     if(array_filter($errors)){
       // echo 'errors in the form';
     } else {
-      // filter for malicious code
-      $email = mysqli_real_escape_string($conn, $_POST['email']);
-      $title = mysqli_real_escape_string($conn, $_POST['title']);
-      $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
+      // // filter for malicious code
+      // $email = mysqli_real_escape_string($conn, $_POST['email']);
+      // $title = mysqli_real_escape_string($conn, $_POST['title']);
+      // $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
+
+
+      
 
       // create sql, insert ^ with => values
-      $sql = "INSERT INTO pizzas(title, email, ingredients) VALUES ('$title', '$email', '$ingredients')";
+      // $sql = "INSERT INTO pizzas(title, email, ingredients) VALUES ('$title', '$email', '$ingredients')";
+      
+        $stmt = $conn->prepare("INSERT INTO pizzas (title, email, ingredients) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $_POST['title'], $_POST['email'], $_POST['ingredients']);
+        $stmt->execute();
+        $stmt->close();
+        header('Location: index.php');
+      
 
       // save to db and check
-      if(mysqli_query($conn, $sql)){
-        // success
-        header('Location: index.php');
-      } else {
-        echo 'query error: ' . msqli_error($conn);
-      }
+      // if(mysqli_query($conn, $sql)){
+      //   // success
+      //   header('Location: index.php');
+      // } else {
+      //   echo 'query error: ' . msqli_error($conn);
+      // }
     }
   }
 

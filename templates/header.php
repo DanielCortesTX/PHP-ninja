@@ -45,6 +45,7 @@
       <li class="grey-text">Hello <?php echo htmlspecialchars($name); ?></li>
       <li class="grey-text">(<?php echo htmlspecialchars($gender);?>)</li>
         <li><a href="add.php" class="btn brand z-depth-0">Add a pizza</a></li>
+        <li><a href="sandbox.php" class="btn brand z-depth-0">sign</a></li>
       </ul>
     </div>
   </nav>
