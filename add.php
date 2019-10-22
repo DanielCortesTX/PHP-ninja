@@ -4,7 +4,7 @@ include('config/db_connect.php');
 
 $title = $email = $ingredients = '';
 
-$errors = array('email'=>'', 'title'=>'', 'ingredients'=>'');
+$errors = array('email'=>'', 'title'=>'', 'ingredients'=>'', 'existing'=>'');
 
   if(isset($_POST['submit'])){
     // check email
@@ -58,7 +58,12 @@ $errors = array('email'=>'', 'title'=>'', 'ingredients'=>'');
         $stmt->bind_param("sss", $_POST['title'], $_POST['email'], $_POST['ingredients']);
         $stmt->execute();
         $stmt->close();
-        header('Location: index.php');
+        if($stmt->affected_rows > 0){
+          header('Location: index.php');
+        } else {
+          $errors['existing'] = 'Title must be unique.';
+        }
+      
       
 
       // save to db and check
@@ -86,6 +91,7 @@ $errors = array('email'=>'', 'title'=>'', 'ingredients'=>'');
       <label for="">Pizza Title:</label>
       <input type="text" name="title" value="<?php echo htmlspecialchars($title)?>">
       <div class="red-text"><?php echo $errors['title'];?></div>
+      <div class="red-text"><?php echo $errors['existing'];?></div>
       <label for="">Ingredients (comma separated):</label>
       <input type="text" name="ingredients" value="<?php echo htmlspecialchars($ingredients)?>">
       <div class="red-text"><?php echo $errors['ingredients'];?></div>
