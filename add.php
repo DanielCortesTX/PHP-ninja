@@ -60,12 +60,14 @@ $errors = array('email'=>'', 'title'=>'', 'ingredients'=>'', 'existing'=>'');
         $stmt->bindParam(':ingredients', $_POST['ingredients']);
         
         $stmt->execute();
-        // $stmt->close();
-        if($stmt->affected_rows > 0){
           header('Location: index.php');
-        } else {
-          $errors['existing'] = 'Title must be unique.';
-        }
+        // $stmt->close();
+        // if($stmt->affected_rows > 0){
+        //   $stmt->execute();
+        //   header('Location: index.php');
+        // } else {
+        //   $errors['existing'] = 'Title must be unique.';
+        // }
       
       
 
