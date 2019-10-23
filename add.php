@@ -54,10 +54,13 @@ $errors = array('email'=>'', 'title'=>'', 'ingredients'=>'', 'existing'=>'');
       // create sql, insert ^ with => values
       // $sql = "INSERT INTO pizzas(title, email, ingredients) VALUES ('$title', '$email', '$ingredients')";
       
-        $stmt = $conn->prepare("INSERT INTO pizzas (title, email, ingredients) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $_POST['title'], $_POST['email'], $_POST['ingredients']);
+        $stmt = $conn->prepare("INSERT INTO pizzas (title, email, ingredients) VALUES (:title, :email, :ingredients)");
+        $stmt->bindParam(':title', $_POST['title']);
+        $stmt->bindParam(':email', $_POST['email']);
+        $stmt->bindParam(':ingredients', $_POST['ingredients']);
+        
         $stmt->execute();
-        $stmt->close();
+        // $stmt->close();
         if($stmt->affected_rows > 0){
           header('Location: index.php');
         } else {
