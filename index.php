@@ -5,17 +5,17 @@ include('config/db_connect.php');
 // write query for all pizzas *
 $sql = 'SELECT title, ingredients, id FROM pizzas ORDER BY created_at';
 
-// make query and get result
-$result = mysqli_query($conn, $sql);
+$stmt = $conn->prepare("SELECT * FROM pizzas ORDER BY created_at");
+$stmt->execute();
 
-// fetch the resulting rows as an array
-$pizzas = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  // while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+  //   echo $row['title'];
+  // }
 
-// free result from memory
-mysqli_free_result($result);
-
-// close connection
-mysqli_close($conn);
+// set the resulting aray to associative
+$pizzas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// print_r($pizzas);
+$conn = null;
 
 ?>
 
