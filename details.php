@@ -21,19 +21,28 @@
   //check GET request id parameter
   if(isset($_GET['id'])){
 
-    $id = mysqli_real_escape_string($conn, $_GET['id']);
+    // $id = mysqli_real_escape_string($conn, $_GET['id']);
 
     // make sql
-    $sql = "SELECT * FROM pizzas WHERE id = $id";
+    // $sql = "SELECT * FROM pizzas WHERE id = $id";
+
+    $stmt = $conn->prepare("SELECT * FROM pizzas WHERE id=:id");
+    $stmt->bindParam(':id', $_GET['id']);
+    // $stmt->execute(['id' => $_GET['id']]);
+    $stmt->execute();
+    $pizza = $stmt->fetch();
+
+    $conn = null;
+    
 
     // get query result
-    $result = mysqli_query($conn, $sql);
+    // $result = mysqli_query($conn, $sql);
 
-    // fetch result in array format
-    $pizza = mysqli_fetch_assoc($result);
+    // // fetch result in array format
+    // $pizza = mysqli_fetch_assoc($result);
 
-    mysqli_free_result($result);
-    mysqli_close($conn);
+    // mysqli_free_result($result);
+    // mysqli_close($conn);
     
   }
 
