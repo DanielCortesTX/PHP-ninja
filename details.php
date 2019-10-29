@@ -4,18 +4,26 @@
 
   if(isset($_POST['delete'])){
 
-    $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
+    // $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
 
-    $sql = "DELETE FROM pizzas WHERE id = $id_to_delete";
+    // $sql = "DELETE FROM pizzas WHERE id = $id_to_delete";
 
-    if(mysqli_query($conn, $sql)){
-      // success
-      header('Location: index.php');
+    $stmt = $conn->prepare("DELETE FROM pizzas WHERE id=:id");
+    $stmt->bindParam(':id', $_POST['id_to_delete']);
+    $stmt->execute();
 
-    } {
-      // failure
-      echo 'query error: ' . mysqli_error($conn);
-    }
+    header('Location: index.php');
+
+    $conn = null;
+
+    // if(mysqli_query($conn, $sql)){
+    //   // success
+    //   header('Location: index.php');
+
+    // } {
+    //   // failure
+    //   echo 'query error: ' . mysqli_error($conn);
+    // }
   }
 
   //check GET request id parameter
