@@ -3,18 +3,13 @@
 include('config/db_connect.php');
 
 // write query for all pizzas *
-// $sql = 'SELECT title, ingredients, id FROM pizzas ORDER BY created_at';
 
 $stmt = $conn->prepare("SELECT * FROM pizzas ORDER BY created_at");
 $stmt->execute();
 
-  // while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-  //   echo $row['title'];
-  // }
-
-// set the resulting aray to associative
+// set the resulting aray to associative and establish pizza variable
 $pizzas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// print_r($pizzas);
+
 $conn = null;
 
 ?>

@@ -43,16 +43,7 @@ $errors = array('email'=>'', 'title'=>'', 'ingredients'=>'', 'existing'=>'');
     if(array_filter($errors)){
       // echo 'errors in the form';
     } else {
-      // // filter for malicious code
-      // $email = mysqli_real_escape_string($conn, $_POST['email']);
-      // $title = mysqli_real_escape_string($conn, $_POST['title']);
-      // $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
-
-
-      
-
-      // create sql, insert ^ with => values
-      // $sql = "INSERT INTO pizzas(title, email, ingredients) VALUES ('$title', '$email', '$ingredients')";
+      // create query then bind the variables
       
         $stmt = $conn->prepare("INSERT INTO pizzas (title, email, ingredients) VALUES (:title, :email, :ingredients)");
         $stmt->bindParam(':title', $_POST['title']);
@@ -60,24 +51,7 @@ $errors = array('email'=>'', 'title'=>'', 'ingredients'=>'', 'existing'=>'');
         $stmt->bindParam(':ingredients', $_POST['ingredients']);
         
         $stmt->execute();
-          header('Location: index.php');
-        // $stmt->close();
-        // if($stmt->affected_rows > 0){
-        //   $stmt->execute();
-        //   header('Location: index.php');
-        // } else {
-        //   $errors['existing'] = 'Title must be unique.';
-        // }
-      
-      
-
-      // save to db and check
-      // if(mysqli_query($conn, $sql)){
-      //   // success
-      //   header('Location: index.php');
-      // } else {
-      //   echo 'query error: ' . msqli_error($conn);
-      // }
+        header('Location: index.php');
     }
   }
 
